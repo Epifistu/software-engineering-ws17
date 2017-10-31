@@ -1,4 +1,4 @@
-public class DollarToEuroConverter extends UnitConverter
+public class DollarToEuroConverter extends CurrencyConverter
 {
   public DollarToEuroConverter() { }
 
@@ -8,9 +8,5 @@ public class DollarToEuroConverter extends UnitConverter
 
   public String toString(){
     return "Dollar to Euro Converter";
-  }
-
-  public void print(){
-    System.out.println(toString());
   }
 };
