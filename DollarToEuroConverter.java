@@ -6,7 +6,11 @@ public class DollarToEuroConverter extends CurrencyConverter
     return inDollars*0.85;
   }
 
+  public String inputUnit(){
+    return "USD";
+  }
+
   public String toString(){
     return "Dollar to Euro Converter";
   }
-};
+}

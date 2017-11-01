@@ -1,26 +1,29 @@
 class Main {
-  public static void main(String[] args)
-  {
-    /*
-    String conversion = args[0];
-    String value = args[1];
-    */
+    public static void main(String[] args) {
 
-    /*
-     * TODO
-     *
-     * use desired conversion here
-     *
-    */
+        String conversion = args[0];
+        String inputValue = args[1];
+        System.out.println("Converter: " + conversion);
+        System.out.println("Input value: " + inputValue);
 
-    UnitConverter myConverter = new DollarToEuroConverter();
-    double aLotOfDollars = 10000;
-    double aLotOfEuros = myConverter.convert(aLotOfDollars);
-    System.out.println(myConverter.toString() + " has converted " + aLotOfDollars + " USD to " + aLotOfEuros + " EUR!");
+        // create converters
+        UnitConverter[] myConverter = new UnitConverter[7];
+        myConverter[0] = new DollarToEuroConverter();
+        myConverter[1] = new BolivianoToEuroConverter();
+        myConverter[2] = new RubleToEuroConverter();
+        myConverter[3] = new AcreToSquaremetreConverter();
+        myConverter[4] = new SquareyardToSquaremetreConverter();
+        myConverter[5] = new CupToLitreConverter();
+        myConverter[6] = new GallonToLitreConverter();
 
-      UnitConverter myBConverter = new BolivianosToEuroConverter();
-      double aLotOfBolis = 10000;
-      double aLotOfnewEuros = myBConverter.convert(aLotOfBolis);
-      System.out.println(myBConverter.toString() + " has converted " + aLotOfBolis + " BOL to " + aLotOfnewEuros + " EUR!");
-  }
+        for (int i = 0; i < myConverter.length; i++) {
+            if (conversion.equals(myConverter[i].toString())) {
+                double value = Double.parseDouble(inputValue);
+                double outputValue = myConverter[i].convert(value);
+                System.out.println(myConverter[i].toString() + " has converted " + value + " " + myConverter[i].inputUnit() + " to " + outputValue + " " + myConverter[i].outputUnit() + "!");
+            }
+        }
+
+
+    }
 }
