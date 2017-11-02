@@ -1,16 +1,21 @@
-public class DollarToEuroConverter extends CurrencyConverter
-{
-  public DollarToEuroConverter() { }
+//subsubclass for converting dollars to euros
+public class DollarToEuroConverter extends CurrencyConverter {
+    //empty constructor
+    public DollarToEuroConverter() {
+    }
 
-  public double convert(double inDollars) {
-    return inDollars*0.85;
-  }
+    //conversion method that takes the input value
+    public double convert(double inDollars) {
+        return inDollars * 0.85;
+    }
 
-  public String inputUnit(){
-    return "USD";
-  }
+    //returns input unit
+    public String inputUnit() {
+        return "USD";
+    }
 
-  public String toString(){
-    return "Dollar to Euro Converter";
-  }
+    //returns the "name" of the converter
+    public String toString() {
+        return "Dollar to Euro Converter";
+    }
 }

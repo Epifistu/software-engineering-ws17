@@ -1,15 +1,21 @@
+//subsubclass for converting acres to square metres
 public class AcreToSquaremetreConverter extends AreaConverter {
-    public AcreToSquaremetreConverter() { }
-
-    public double convert(double inAcres) {
-        return inAcres*4046.86;
+    //empty constructor
+    public AcreToSquaremetreConverter() {
     }
 
-    public String inputUnit(){
+    //conversion method that takes the input value
+    public double convert(double inAcres) {
+        return inAcres * 4046.86;
+    }
+
+    //returns input unit
+    public String inputUnit() {
         return "acres";
     }
 
-    public String toString(){
+    //returns the "name" of the converter
+    public String toString() {
         return "Acre to Squaremetre Converter";
     }
 }
