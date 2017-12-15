@@ -1,21 +1,23 @@
 //subsubclass for converting rubles to euros
-public class RubleToEuroConverter extends CurrencyConverter {
-    //empty constructor
-    public RubleToEuroConverter() {
+public class RubleToEuroConverter extends ConverterDecorator {
+    //constructor
+    public RubleToEuroConverter(UnitConverter c) {
+        super(c);
     }
-
+    //returns factor to be converted by
+    public double convertFactor(){
+        return 0.0147;
+    }
     //conversion method that takes the input value
     public double convert(double inRubles) {
-        return inRubles * 0.0147;
+        return super.convert(inRubles) * convertFactor();
     }
-
     //returns input unit
     public String inputUnit() {
-        return "RUB";
+        return "Rubles";
     }
-
     //returns the "name" of the converter
     public String toString() {
-        return "Ruble to Euro Converter";
+        return inputUnit() + " to " + outputUnit() + " Converter";
     }
 }

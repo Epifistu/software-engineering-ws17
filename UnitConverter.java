@@ -1,17 +1,18 @@
-//superclass for all converters
-public abstract class UnitConverter
+//interface for all converters
+public interface UnitConverter
 {
-    public UnitConverter() {
-    }
+
+    //factor to convert by
+    double convertFactor();
     //conversion method that takes the input value
-    public abstract double convert(double inValue);
+    double convert(double inValue);
     //returns the "name" of the class
-    public abstract String toString();
+    String toString();
     //returns the input unit
-    public abstract String inputUnit();
+    String inputUnit();
     //returns the output unit
-    public abstract String outputUnit();
+    String outputUnit();
     //prints out the "name" of the class
-    public abstract void print();
+    void print();
 };
 

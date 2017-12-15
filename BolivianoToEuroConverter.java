@@ -1,21 +1,23 @@
 //subsubclass for converting bolivianos to euros
-public class BolivianoToEuroConverter extends CurrencyConverter {
-    //empty constructor
-    public BolivianoToEuroConverter() {
+public class BolivianoToEuroConverter extends ConverterDecorator {
+    //constructor
+    public BolivianoToEuroConverter(UnitConverter c) {
+        super(c);
     }
-
+    //returns factor to be converted by
+    public double convertFactor(){
+        return 0.12;
+    }
     //conversion method that takes the input value
     public double convert(double inBolivianos) {
-        return inBolivianos * 0.12;
+        return super.convert(inBolivianos) * convertFactor();
     }
-
     //returns input unit
     public String inputUnit() {
-        return "BOB";
+        return "Bolivianos";
     }
-
     //returns the "name" of the converter
     public String toString() {
-        return "Boliviano to Euro Converter";
+        return inputUnit() + " to " + outputUnit() + " Converter";
     }
 }

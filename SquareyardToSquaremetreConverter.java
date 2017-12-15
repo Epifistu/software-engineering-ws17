@@ -1,21 +1,23 @@
 //subsubclass for converting square yards to square metres
-public class SquareyardToSquaremetreConverter extends AreaConverter {
-    //empty constructor
-    public SquareyardToSquaremetreConverter() {
+public class SquareyardToSquaremetreConverter extends ConverterDecorator {
+    //constructor
+    public SquareyardToSquaremetreConverter(UnitConverter c) {
+        super(c);
     }
-
+    //returns factor to be converted by
+    public double convertFactor(){
+        return 0.836127;
+    }
     //conversion method that takes the input value
     public double convert(double inSquareyards) {
-        return inSquareyards * 0.836127;
+        return super.convert(inSquareyards) * convertFactor();
     }
-
     //returns input unit
     public String inputUnit() {
-        return "yd²";
+        return "Squareyards";
     }
-
     //returns the "name" of the converter
     public String toString() {
-        return "Squareyard to Squaremetre Converter";
+        return inputUnit() + " to " + outputUnit() + " Converter";
     }
 }
