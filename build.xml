@@ -1,0 +1,86 @@
+  <!-- 
+
+	Build file made using the following resources:
+	https://ant.apache.org/manual/
+	http://tutorials.jenkov.com/ant/ant-tutorial.html
+	https://stackoverflow.com/questions/4042856/system-out-with-ant
+	https://eureka.ykyuen.info/2014/01/23/apache-ant-check-if-a-string-property-contains-a-certain-string/
+	
+  -->
+
+<project name="Converter" default="dist" basedir=".">
+  <description>
+    build file for the converter made in software engineering ws 17
+  </description>
+  <!-- global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="testdir" location="testdir"/>
+
+  <target name="init">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+	<echo>Build directory created</echo>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}"/>
+	<echo>Source files compiled</echo>
+  </target>
+
+  <target name="tests" depends="compile"
+        description="Run testsuite">
+		
+    <!-- Build .jar file for tests to ${testdir} -->
+	<mkdir dir="${testdir}"/>
+    <jar jarfile="${testdir}/test.jar" basedir="${build}">
+		<manifest>
+			<attribute name="Main-Class" value="TinyTestJ.RunTests" />
+		</manifest>
+	</jar>
+    <!-- Run tests -->
+	<java classname="TinyTestJ.RunTests" outputproperty="javaoutput">
+         <arg value="TestSuite"/>
+         <classpath>
+           <pathelement location="testdir/test.jar"/>
+           <pathelement path="${java.class.path}"/>
+         </classpath>
+		 
+	</java>
+	<echo message="${javaoutput}" />
+    <!-- Check if all tests passed -->
+    <condition property="allPassed">
+		<matches pattern="failed 0" string="${javaoutput}"/>
+    </condition>
+    <!-- Abort if a test failed -->
+    <fail message="Some test/s failed." unless="allPassed"/>
+	<echo message="All tests passed!"/>
+	
+    <!-- Delete ${testdir} including test.jar file -->
+    <delete dir="${testdir}"/>
+  </target>
+  
+  <target name="dist" depends="compile, tests"
+        description="generate the distribution">
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+
+    <!-- Put everything in ${build} into the converter.jar file -->
+    <jar jarfile="${dist}/converter.jar" basedir="${build}">
+		<manifest>
+			<attribute name="Main-Class" value="Main" />
+		</manifest>
+	</jar>
+  </target>
+  
+  <target name="clean"
+        description="clean up">
+    <!-- Delete the directory trees, also manually if needed -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+    <delete dir="${testdir}"/>
+  </target>
+</project>
