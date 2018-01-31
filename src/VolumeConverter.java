@@ -15,6 +15,16 @@ public class VolumeConverter implements UnitConverter {
     }
     //conversion method that takes the input value
     public double convert(double inValue) {
+        try {
+            //negative or 0 volume can't be converted
+            if(inValue <= 0) {
+                throw new EmptyVolume();
+            }
+        } catch (EmptyVolume emptyVolume) {
+            emptyVolume.printStackTrace();
+            // stop the program in case of exception
+            System.exit(1);
+        }
         return inValue;
     }
     //returns the "name" of the class

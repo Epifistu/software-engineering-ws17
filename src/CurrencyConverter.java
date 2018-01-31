@@ -1,3 +1,5 @@
+
+
 //subclass for currency converters
 public class CurrencyConverter implements UnitConverter {
 
@@ -14,8 +16,20 @@ public class CurrencyConverter implements UnitConverter {
         return Double.parseDouble(null);
     }
     //conversion method that takes the input value
-    public double convert(double inValue) {
-        return inValue;
+    public double convert(double inValue){
+
+            try {
+                //negative or 0 money can't be converted
+                if(inValue <= 0) {
+                    throw new EmptyAccount();
+                }
+            } catch (EmptyAccount emptyAccount) {
+                emptyAccount.printStackTrace();
+                // stop the program in case of exception
+                System.exit(1);
+            }
+            return inValue;
+
     }
     //returns the "name" of the class
     public String toString(){
